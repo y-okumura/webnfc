@@ -14,14 +14,16 @@
         $startButton.on('click', async () => {
           $startButton.text('start scan...')
           const reader = new NDEFReader();
-          await reader.scan();
-
           reader.addEventListener("reading", ({ message, serialNumber }) => {
             $startButton.text('scan #' + serialNumber);
             
             $('#output').text("message: " + message);
             
           });
+          
+          await reader.scan();
+          $startButton.text('scaned.')
+
         });
       });
     </script>
