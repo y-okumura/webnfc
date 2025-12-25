@@ -10,8 +10,15 @@
     <script>
 // https://zenn.dev/ktpi2000/articles/webnfc-playground を参考に書きました
       $(function() {
-        $('button#start-button').on('click', function() {
-          $('#output').text("なんやかや");
+        $('button#start-button').on('click', async () => {
+          
+          const reader = new NDEFReader();
+          await reader.scan();
+
+          reader.addEventListener("reading", ({ message, serialNumber }) => {
+            $('#output').text(message);
+            
+          });
         });
       });
     </script>
